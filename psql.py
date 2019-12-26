@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# login at elephantsql.com to get creds for free dbserver
+# login at elephantsql.com(through github) to get creds for free dbserver
 import psycopg2
 
 DSN = {
