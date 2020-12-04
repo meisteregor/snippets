@@ -14,6 +14,7 @@ def gather(threads_count):
     for i in range(threads_count):
         threads[i] = threading.Thread(target=thread_job, args=(results, i))
         threads[i].start()
+    # upper and lower same 'for' loops are necessary!
     # do some other stuff
     for i in range(threads_count):
         threads[i].join()
