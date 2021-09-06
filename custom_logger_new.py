@@ -2,13 +2,18 @@ from loguru import logger
 import os
 import urllib3
 
-# minimal
+# custom_logger.py for ins
+logfile = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'logs' + os.sep + os.path.basename(
+    os.path.dirname(os.path.abspath(__file__))) + '_{time:YYYY-MM-DD}.log'
+logger.add(logfile, format="{time} {level} {message}", level="DEBUG", retention="1 months")
+
+# main for imwot
 def set_logger():
     logfile = os.path.dirname(os.path.abspath(__file__)) + os.sep + cons.LOGFILE
     logger.add(logfile, format="{time} {level} {message}", level="DEBUG", rotation="1 year",
                compression="zip")
 
-# extended
+# main for gme
 def setup_logger():
     TIMESTAMP_STR = '<green>{time:YYYY-MM-DD HH:mm:ss}</green>'
     LOG_FORMAT_MINIMAL = "[<level>{level: <8}</level>] <level>{message}</level>"
