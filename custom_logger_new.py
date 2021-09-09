@@ -1,11 +1,20 @@
 from loguru import logger
+import sys
 import os
 import urllib3
 
 # custom_logger.py for ins
+log_format = "{time} {level} {message}"
+# auto detect logsfolder for wdo app skeleton(custom_logger.py neibours with main-script)
 logfile = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'logs' + os.sep + os.path.basename(
     os.path.dirname(os.path.abspath(__file__))) + '_{time:YYYY-MM-DD}.log'
-logger.add(logfile, format="{time} {level} {message}", level="DEBUG", retention="1 months")
+log_config = {
+        "handlers": [
+            {"sink": sys.stdout, "format": log_format, "level": "INFO"},
+            {"sink": logfile, "format": log_format, "level": "DEBUG", "retention": "1 months"},
+        ],
+    }
+logger.configure(**log_config)
 
 # main for imwot
 def set_logger():
