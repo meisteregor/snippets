@@ -3,6 +3,13 @@ import sys
 import os
 import urllib3
 
+# main for any wdoapp-style folder structure if entrypoint scriptname == appname
+def set_logger():
+    logfile = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'logs' + os.sep + os.path.basename(
+        os.path.dirname(os.path.abspath(__file__))) + '.log'
+    logger.add(logfile, format="{time} {level} {message}", level="DEBUG", rotation="1 year",
+               compression="zip")
+    
 # custom_logger.py for ins
 log_format = "{time} {level} {message}"
 # auto detect logsfolder for wdo app skeleton(custom_logger.py neibours with main-script)
@@ -15,12 +22,6 @@ log_config = {
         ],
     }
 logger.configure(**log_config)
-
-# main for imwot
-def set_logger():
-    logfile = os.path.dirname(os.path.abspath(__file__)) + os.sep + cons.LOGFILE
-    logger.add(logfile, format="{time} {level} {message}", level="DEBUG", rotation="1 year",
-               compression="zip")
 
 # main for gme
 def setup_logger():
